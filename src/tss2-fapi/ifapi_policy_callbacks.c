@@ -533,6 +533,8 @@ ifapi_policyeval_cbauth(TPM2B_NAME *name,
         cb_ctx->auth_object_ptr = &cb_ctx->load_ctx.auth_object;
         r = ifapi_load_key(fapi_ctx, ifapi_get_object_path(&cb_ctx->object),
                            &cb_ctx->auth_object_ptr);
+        return_try_again(r);
+        goto_if_error(r, "Authorize object", cleanup);
         if (r == TSS2_RC_SUCCESS && !cb_ctx->load_ctx.auth_object.misc.key.persistent_handle) {
             current_policy->flush_handle = true;
         }
