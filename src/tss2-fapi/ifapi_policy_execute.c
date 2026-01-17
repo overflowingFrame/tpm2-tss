@@ -864,6 +864,7 @@ execute_policy_secret(ESYS_CONTEXT          *esys_ctx,
         r = Esys_PolicySecret_Finish(esys_ctx, NULL, NULL);
         return_try_again(r);
         goto_if_error(r, "FAPI PolicySecret_Finish", cleanup);
+
         if (!current_policy->flush_handle) {
             current_policy->state = POLICY_EXECUTE_INIT;
             return r;
