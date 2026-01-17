@@ -554,7 +554,8 @@ ifapi_policyeval_cbauth(TPM2B_NAME *name,
         fapi_ctx->createPrimary = cb_ctx->create_primary_ctx;
         cb_ctx->object = *cb_ctx->auth_object_ptr;
         *auth_handle = cb_ctx->auth_object_ptr->public.handle;
-        r = ifapi_authorize_object(fapi_ctx, &cb_ctx->load_ctx.auth_object, authSession);
+
+        r = ifapi_authorize_object(fapi_ctx, cb_ctx->auth_object_ptr, authSession);
         fapi_ctx->loadKey = cb_ctx->load_ctx_sav;
         fapi_ctx->createPrimary = cb_ctx->create_primary_ctx;
         FAPI_SYNC(r, "Fapi authorize object.", cleanup);
